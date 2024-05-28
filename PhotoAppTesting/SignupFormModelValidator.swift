@@ -26,4 +26,8 @@ class SignupFormModelValidator {
 		return passwordValid
 		
 	}
+	
+	func isPasswordMatch(password: String, repeatPassword: String) -> Bool {		
+		return password == repeatPassword
+	}
 }
