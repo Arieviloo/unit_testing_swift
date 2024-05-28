@@ -9,24 +9,35 @@ import XCTest
 @testable import PhotoAppTesting
 
 class SignupFormModelValidatorTests: XCTestCase {
+	var sut: SignupFormModelValidator!
 	
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
+	override func setUpWithError() throws {
+		sut = SignupFormModelValidator()
+	}
+	
+	override func tearDownWithError() throws {
+		sut = nil
+	}
+	
 	func testSignFormModelValidator_WhenValidFirstNameProvided_ShouldReturnTrue() {
 		// Arrange
-		let sut = SignupFormModelValidator()
+		
 		// Act
 		let isFirstNameValid = sut.isFirstNameValid(firstName: "Dojo")
 		// Assert
 		XCTAssertTrue(isFirstNameValid, "The isFirstNameValid() should have returned TRUE for a valid first name but returned FALSE")
 		
-		
 	}
-
+	
+	func testSignFormModelValidator_WhenValidShortNameProvided_ShouldReturnFalse() {
+		let isShortNameValid = sut.isFirstNameValid(firstName: "S")
+		XCTAssertFalse(isShortNameValid, "The isShortNameValid should have returned FALSE for valid name that is shorter than 2 characters but it has returned TRUE")
+	}
+	
+	func testSignFormModelValidator_WhenValidTooLongNameProvided_ShouldReturnFalse() {
+		let isLongNameValid = sut.isFirstNameValid(firstName: "pneumoultramicroscopicossilicovulcanoconiótico")
+		XCTAssertFalse(isLongNameValid, "The isLongNameValid shoulf have returned FALSE for first name that is long than \(SignupConstants.firstNameMaxLength) characters but it has returned TRUE")
+	}
+	
 }
+

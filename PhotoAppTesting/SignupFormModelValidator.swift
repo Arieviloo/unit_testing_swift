@@ -3,12 +3,12 @@ import UIKit
 class SignupFormModelValidator {
 	
 	func isFirstNameValid(firstName: String) -> Bool {
-		var nameEmpty = true
+		var returnValueName = true
 		
-		if firstName.isEmpty {
-			nameEmpty = false
+		if firstName.count < SignupConstants.firstNameMinLength || firstName.count > SignupConstants.firstNameMaxLength {
+			returnValueName = false
 		}
 		
-		return nameEmpty
+		return returnValueName
 	}
 }
