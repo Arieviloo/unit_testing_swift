@@ -44,10 +44,24 @@ class SignupFormModelValidatorTests: XCTestCase {
 		XCTAssertTrue(isEmailValid, "The isEmailValid should have returned TRUE for email format but it has returned FALSE")
 	}
 	
-	func testSignFormMOdelValidator_WhenValidEmailFormatProvided_ShouldReturnFalse() {
+	func testSignFormModelValidator_WhenValidEmailFormatProvided_ShouldReturnFalse() {
 		let isEmailValid = sut.isValidEmailFormat(email: "jaja")
 		XCTAssertFalse(isEmailValid, "The isEmailValid should have returned FALSE for email format but it has returned TRUE")
 	}
 	
+	func testSignFormModelValidator_WhenValidPasswordLengthProvided_ShoulReturnTrue() {
+		let isPasswordValid = sut.isPasswordValid(password: "12345678")
+		XCTAssertTrue(isPasswordValid, "The isPasswordValid should have returned TRUE for a valid o length but returned FALSE")
+	}
+	
+	func testSignFormModelValidator_WhenValidPasswordLengthLessMinProvided_ShoulReturnFalse() {
+		let isPasswordValid = sut.isPasswordValid(password: "123")
+		XCTAssertFalse(isPasswordValid, "The isPasswordValid should have returned FALSE when the length is less than the min but it has returned TRUE")
+	}
+	
+	func testSignFormModelValidator_WhenValidPasswordLengthBiggerMaxProvided_ShoulReturnFalse() {
+		let isPasswordValid = sut.isPasswordValid(password: "123456789123456789")
+		XCTAssertFalse(isPasswordValid, "The isPasswordValid should have returned FALSE when the length is bigger than the max but it has returned TRUE")
+	}
 }
 
